@@ -1,12 +1,12 @@
 ﻿using System;
 
-namespace AnotherTest
+namespace TaskTracker
 {
     class Program
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+
         }
     }
 }
