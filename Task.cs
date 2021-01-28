@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Runtime.Serialization; // Needed to make objects serializable (ISerializable)
 
-namespace TaskTrackerConsoleApp
+namespace TaskTracker
 {
     public class Task : ISerializable
     {
