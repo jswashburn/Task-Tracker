@@ -3,11 +3,11 @@
 
 namespace TaskTracker
 {
-    public class Menu
+    public static class Menu
     {
 
 
-        public void showMainMenu()
+        public static void ShowMainMenu()
         {
             //is public the correct access modifier
             while (true)
@@ -25,11 +25,11 @@ namespace TaskTracker
                 {
                     case 1:
                         //user selected tasks
-                        showTaskMenu();
+                        ShowTaskMenu();
                         break;
                     case 2:
                         //user selected employees
-                        showEmployeeMenu();
+                        ShowEmployeeMenu();
                         break;
                     case 3:
                         //user selected quit, close the program
@@ -40,17 +40,13 @@ namespace TaskTracker
                         //user did not enter a valid selection, reload menu
                         Console.WriteLine("invalid user input, please try again");
                         break;
-
                 }
-
                 Console.Clear();
-
             }
-
         }
 
 
-        public void showTaskMenu()
+        public static void ShowTaskMenu()
         {
             Console.WriteLine("=============== Task Menu ==============");
             Console.WriteLine("1. View Active Tasks");
@@ -61,7 +57,7 @@ namespace TaskTracker
             Console.ReadLine();
         }
 
-        public void showEmployeeMenu()
+        public static void ShowEmployeeMenu()
         {
             Console.WriteLine("=============== Employee Menu ==============");
             Console.WriteLine("1. Show All Employees");
@@ -109,9 +105,9 @@ namespace TaskTracker
                     //user did not enter a valid selection, reload menu
                     Console.WriteLine("invalid user input, please try again");
                     break;
-                }
-
             }
+
+        }
 
     }
 }
