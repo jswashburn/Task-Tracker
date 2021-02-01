@@ -9,7 +9,7 @@ namespace TaskTracker
     class Program
     {
         static List<Task> Tasks { get; set; } = new List<Task>();
-        static List<Worker> Workers { get; set; } = new List<Worker>();
+        static List<Employee> Employees { get; set; } = new List<Employee>();
         static XmlSerializer serializer = new XmlSerializer(typeof(List<Task>));
 
         static void Main(string[] args)
@@ -17,7 +17,7 @@ namespace TaskTracker
             LoadTasks();
             ShowMainMenu();
         }
-
+        
         static void SaveTasks(List<Task> tasks)
         {
             // Serialize Tasks to file stream

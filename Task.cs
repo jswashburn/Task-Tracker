@@ -7,14 +7,14 @@ namespace TaskTracker
     public class Task : ISerializable
     {
         public string Name { get; set; }
-        public List<Worker> WorkersAssigned { get; set; }
+        public List<Employee> WorkersAssigned { get; set; }
         public DateTime DateCreated { get; set; }
         public DateTime? DateCompleted { get; set; }
         public bool Complete { get; set; }
 
         Task() { } // Parameterless constructor is required for XML serialization
 
-        public Task(string name, List<Worker> workersAssigned)
+        public Task(string name, List<Employee> workersAssigned)
         {
             Name = name.ToLower().Trim();
             WorkersAssigned = workersAssigned;

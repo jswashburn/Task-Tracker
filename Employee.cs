@@ -4,16 +4,16 @@ using System.Runtime.Serialization; // Needed to make objects serializable (ISer
 
 namespace TaskTracker
 {
-    public class Worker : ISerializable
+    public class Employee : ISerializable
     {
         public string Name { get; set; }
         public string Status { get; set; }
         public List<Task> AssignedTasks { get; set; }
         public DateTime Birthday { get; set; }
 
-        Worker() { } // Parameterless constructor is required for XML serialization
+        Employee() { } // Parameterless constructor is required for XML serialization
 
-        public Worker(string name, List<Task> assignedTasks, DateTime birthday)
+        public Employee(string name, List<Task> assignedTasks, DateTime birthday)
         {
             Name = name;
             AssignedTasks = assignedTasks;
@@ -31,7 +31,7 @@ namespace TaskTracker
         // Overrides the default ToString behavior, provides string representation of Worker
         public override string ToString()
         {
-            return $"Worker {Name} | CurrentTasks: {AssignedTasks}";
+            return $"Employee {Name} | CurrentTasks: {AssignedTasks}";
         }
     }
 }

@@ -73,7 +73,7 @@ namespace TaskTracker
                 case 1:
                     Console.WriteLine("1. Show All Employees: ");
                     Console.WriteLine("========================================");
-                    Employee.showEmployees();
+                    // Employee.showEmployees();
                     Console.WriteLine("========================================");
                     Console.ReadLine();
                     break;
@@ -81,8 +81,8 @@ namespace TaskTracker
                 case 2:
                     Console.WriteLine("2. Create an Employee: ");
                     Console.WriteLine("========================================");
-                    Employee newEmployee = new Employee();
-                    newEmployee.setEmployeeValues();
+                    //Employee newEmployee = new Employee();
+                    //newEmployee.setEmployeeValues();
                     //employeeTracker.listOfEmployees.Add(newEmployee); This should be taken care of with the method in the class
                     Console.WriteLine("========================================");
                     Console.ReadLine();
@@ -91,7 +91,7 @@ namespace TaskTracker
                 case 3:
                     Console.WriteLine("3. Delete Employee");
                     Console.WriteLine("========================================");
-                    Employee.deleteEmployee();
+                    //Employee.deleteEmployee();
                     Console.WriteLine("========================================");
                     Console.ReadLine();
                     break;
