@@ -68,7 +68,7 @@ namespace TaskTracker
             Console.WriteLine("2. Create Employee");
             Console.WriteLine("3. Delete Employee");
             Console.WriteLine("4. Return to Main Menu");
-            Console.WriteLine("========================================");
+            Console.WriteLine("============================================");
 
             int userInput = int.Parse(Console.ReadLine()); //tryparse didnt work? use the out reference?
 
