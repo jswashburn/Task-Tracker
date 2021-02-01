@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Xml.Serialization;
 using System.IO;
+using static TaskTracker.Menu;
 
 namespace TaskTracker
 {
@@ -13,7 +14,8 @@ namespace TaskTracker
 
         static void Main(string[] args)
         {
-            
+            LoadTasks();
+            ShowMainMenu();
         }
 
         static void SaveTasks(List<Task> tasks)
