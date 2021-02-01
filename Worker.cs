@@ -15,7 +15,7 @@ namespace TaskTracker
 
         public Worker(string name, List<Task> assignedTasks, DateTime birthday)
         {
-            Name = name.ToLower().Trim();
+            Name = name;
             AssignedTasks = assignedTasks;
             Birthday = birthday;
         }
