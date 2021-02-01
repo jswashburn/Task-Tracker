@@ -13,7 +13,7 @@ namespace TaskTracker
 
         static void Main(string[] args)
         {
-            
+
         }
 
         static void SaveTasks(List<Task> tasks)
@@ -28,6 +28,7 @@ namespace TaskTracker
             // Open file stream and deserialize to Tasks
             using Stream stream = File.OpenRead("./tasks.xml");
             Tasks = (List<Task>)serializer.Deserialize(stream);
+
         }
     }
 }
