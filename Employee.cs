@@ -8,12 +8,13 @@ namespace TaskTracker
     {
         public string Name { get; set; }
         public string Status { get; set; }
+
         public List<Task> AssignedTasks { get; set; }
         public DateTime Birthday { get; set; }
 
-        Employee() { } // Parameterless constructor is required for XML serialization
+        public Employee() { } // Parameterless constructor is required for XML serialization
 
-        public Employee(string name, List<Task> assignedTasks, DateTime birthday)
+        public Employee(string name, DateTime birthday, List<Task> assignedTasks = null)
         {
             Name = name;
             AssignedTasks = assignedTasks;

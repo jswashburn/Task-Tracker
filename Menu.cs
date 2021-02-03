@@ -1,17 +1,28 @@
 ﻿using System;
-
+using static TaskTracker.Program;
+using System.Collections.Generic;
+using System.Threading;
 
 namespace TaskTracker
 {
     public static class Menu
     {
-
+        public static int Check(string input)
+        {
+            int output;
+            while(!int.TryParse(input, out output))
+            {
+                Console.Write("Please enter a valid input: ");
+                input = Console.ReadLine();
+            }return output;
+        }
 
         public static void ShowMainMenu()
         {
             //is public the correct access modifier
             while (true)
             {
+                Console.Clear();
                 Console.WriteLine("=============== Main Menu ==============");
                 Console.WriteLine("1. Tasks");
                 Console.WriteLine("2. Employees");
@@ -34,6 +45,7 @@ namespace TaskTracker
                     case 3:
                         //user selected quit, close the program
                         Console.WriteLine("exiting....");
+                        Thread.Sleep(4000);
                         Environment.Exit(0);
                         break;
                     default:
@@ -71,20 +83,35 @@ namespace TaskTracker
             switch (userInput)
             {
                 case 1:
+                    Console.Clear();
                     Console.WriteLine("1. Show All Employees: ");
                     Console.WriteLine("========================================");
-                    // Employee.showEmployees();
-                    Console.WriteLine("========================================");
+                    if ((Employees != null))
+                    {
+                        Employees.ForEach(Console.WriteLine);
+                    }
+                    else Console.WriteLine("There are no employees in your list");
+                    Console.WriteLine("========================================\nTo continue press enter...");
+
                     Console.ReadLine();
                     break;
                 //for each employee in employee list have that employee object print its staus
                 case 2:
+                    Console.Clear();
                     Console.WriteLine("2. Create an Employee: ");
                     Console.WriteLine("========================================");
-                    //Employee newEmployee = new Employee();
-                    //newEmployee.setEmployeeValues();
-                    //employeeTracker.listOfEmployees.Add(newEmployee); This should be taken care of with the method in the class
-                    Console.WriteLine("========================================");
+                    Console.Write("Please enter name: ");
+                    string name = Console.ReadLine().ToLower();
+                    Console.Write("Please enter employee birthday in MM\\DD\\YYYY format:\nMonth: ");
+                    int month = Check(Console.ReadLine());
+                    Console.Write("Day: ");
+                    int day = Check(Console.ReadLine());
+                    Console.Write("Year: ");
+                    int year = Check(Console.ReadLine());
+                    DateTime birthday = new DateTime(year, month, day);
+                    Employee newEmployee = new Employee(name, birthday);
+                    Employees.Add(newEmployee);
+                    Console.WriteLine("========================================\nTo continue press enter...");
                     Console.ReadLine();
                     break;
                 //call a method called createEmployee() from the employee class and add it to a list
@@ -92,6 +119,8 @@ namespace TaskTracker
                     Console.WriteLine("3. Delete Employee");
                     Console.WriteLine("========================================");
                     //Employee.deleteEmployee();
+                    Console.Write("Please enter employee name: ");
+                    //string 
                     Console.WriteLine("========================================");
                     Console.ReadLine();
                     break;

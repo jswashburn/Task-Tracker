@@ -3,14 +3,15 @@ using System.Collections.Generic;
 using System.Xml.Serialization;
 using System.IO;
 using static TaskTracker.Menu;
+using System.Threading;
 
 namespace TaskTracker
 {
     class Program
     {
-        static List<Task> Tasks { get; set; } = new List<Task>();
-        static List<Employee> Employees { get; set; } = new List<Employee>();
-        static XmlSerializer serializer = new XmlSerializer(typeof(List<Task>));
+        public static List<Task> Tasks { get; set; } = new List<Task>();
+        public static List<Employee> Employees { get; set; } = new List<Employee>();
+        static XmlSerializer Serializer = new XmlSerializer(typeof(List<Task>));
 
         static void Main(string[] args)
         {
@@ -18,18 +19,27 @@ namespace TaskTracker
             ShowMainMenu();
         }
         
-        static void SaveTasks(List<Task> tasks)
+        public static void SaveTasks(List<Task> tasks)
         {
             // Serialize Tasks to file stream
             using Stream stream = File.Open("./tasks.xml", FileMode.OpenOrCreate, FileAccess.Write, FileShare.None);
-            serializer.Serialize(stream, tasks);
+            Serializer.Serialize(stream, tasks);
         }
 
-        static void LoadTasks()
+        public static void LoadTasks()
         {
-            // Open file stream and deserialize to Tasks
-            using Stream stream = File.OpenRead("./tasks.xml");
-            Tasks = (List<Task>)serializer.Deserialize(stream);
+            try
+            {
+                // Open file stream and deserialize to Tasks
+                using Stream stream = File.OpenRead("./tasks.xml");
+                Tasks = (List<Task>)Serializer.Deserialize(stream);
+            }
+            catch (FileNotFoundException)
+            {
+                Console.WriteLine("A local file was not found. Generating new file...");
+                Thread.Sleep(4000);
+            }
+
         }
     }
 }
