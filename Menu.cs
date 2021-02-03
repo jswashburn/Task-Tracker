@@ -2,6 +2,7 @@
 using static TaskTracker.Program;
 using System.Collections.Generic;
 using System.Threading;
+using System.Linq;
 
 namespace TaskTracker
 {
@@ -29,7 +30,7 @@ namespace TaskTracker
                 Console.WriteLine("3. Quit");
                 Console.WriteLine("========================================");
 
-                int userInput = int.Parse(Console.ReadLine()); //tryparse didnt work? use the out reference?
+                int userInput = Check(Console.ReadLine()); //tryparse didnt work? use the out reference?
                 Console.Clear();
 
                 switch (userInput)  //Look up using enums here, so the user can type anser instead of number
@@ -78,7 +79,7 @@ namespace TaskTracker
             Console.WriteLine("4. Return to Main Menu");
             Console.WriteLine("============================================");
 
-            int userInput = int.Parse(Console.ReadLine()); //tryparse didnt work? use the out reference?
+            int userInput = Check(Console.ReadLine()); //tryparse didnt work? use the out reference?
 
             switch (userInput)
             {
@@ -86,13 +87,12 @@ namespace TaskTracker
                     Console.Clear();
                     Console.WriteLine("1. Show All Employees: ");
                     Console.WriteLine("========================================");
-                    if ((Employees != null))
+                    if (Employees.Count != 0)
                     {
                         Employees.ForEach(Console.WriteLine);
                     }
                     else Console.WriteLine("There are no employees in your list");
                     Console.WriteLine("========================================\nTo continue press enter...");
-
                     Console.ReadLine();
                     break;
                 //for each employee in employee list have that employee object print its staus
@@ -100,6 +100,7 @@ namespace TaskTracker
                     Console.Clear();
                     Console.WriteLine("2. Create an Employee: ");
                     Console.WriteLine("========================================");
+
                     Console.Write("Please enter name: ");
                     string name = Console.ReadLine().ToLower();
                     Console.Write("Please enter employee birthday in MM\\DD\\YYYY format:\nMonth: ");
@@ -108,9 +109,11 @@ namespace TaskTracker
                     int day = Check(Console.ReadLine());
                     Console.Write("Year: ");
                     int year = Check(Console.ReadLine());
+
                     DateTime birthday = new DateTime(year, month, day);
                     Employee newEmployee = new Employee(name, birthday);
                     Employees.Add(newEmployee);
+
                     Console.WriteLine("========================================\nTo continue press enter...");
                     Console.ReadLine();
                     break;
@@ -118,21 +121,35 @@ namespace TaskTracker
                 case 3:
                     Console.WriteLine("3. Delete Employee");
                     Console.WriteLine("========================================");
-                    //Employee.deleteEmployee();
+
                     Console.Write("Please enter employee name: ");
-                    //string 
-                    Console.WriteLine("========================================");
+                    string delete = Console.ReadLine().ToLower();
+
+                    bool t = true;
+                    for (int i = 0; i < Employees.Count; i++)
+                    {
+                        if (Employees[i].Name == delete)
+                        {
+                            Employees.Remove(Employees[i]);
+                            Console.WriteLine($"{delete} has been removed");
+                            t = false;
+                        }
+                    }
+                    if (t)
+                    {
+                        Console.WriteLine("That name does not exist");
+                    }
+
+                    Console.WriteLine("========================================\nTo continue press enter...");
                     Console.ReadLine();
                     break;
                 //search the employee list and find if the named employee exists, then remove it
                 case 4:
                     Console.WriteLine("4. Return to Main Menu");
                     Console.WriteLine("========================================");
-                    Console.ReadLine();
                     break;
                 default:
-                    //user did not enter a valid selection, reload menu
-                    Console.WriteLine("invalid user input, please try again");
+                    Console.WriteLine("Invalid user input, please try again");
                     break;
             }
 
