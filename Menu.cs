@@ -1,5 +1,6 @@
 ﻿using System;
 using static TaskTracker.Program;
+using static TaskTracker.Task;
 using System.Collections.Generic;
 using System.Threading;
 using System.Linq;
@@ -68,6 +69,50 @@ namespace TaskTracker
             Console.WriteLine("4. Return to Main Menu");
             Console.WriteLine("========================================");
             Console.ReadLine();
+            int userInput = Check(Console.ReadLine());
+            switch (userInput)
+            {
+                case 1:
+                    Console.Clear();
+                    Console.WriteLine("1. View Active Tasks");
+                    Console.WriteLine("========================================");
+                    if (TotalTask.Count != 0)
+
+
+                        Console.WriteLine("========================================\nTo continue press enter...");
+                    Console.ReadLine();
+                    break;
+                case 2:
+                    Console.Clear();
+                    Console.WriteLine("2. Show Completed Tasks");
+                    Console.WriteLine("========================================");
+
+                    Console.WriteLine("========================================\nTo continue press enter...");
+                    Console.ReadLine();
+                    break;
+                case 3:
+                    Console.Clear();
+                    Console.WriteLine("3. Create Task");
+                    Console.WriteLine("========================================");
+
+                    Console.WriteLine("========================================\nTo continue press enter...");
+                    Console.ReadLine();
+                    break;
+                case 4:
+                    Console.Clear();
+                    Console.WriteLine("4. Return to Main Menu");
+                    Console.WriteLine("========================================");
+
+                    Console.WriteLine("========================================\nTo continue press enter...");
+                    Console.ReadLine();
+                    break;
+                default:
+                    Console.WriteLine("Invalid user input, please try again");
+                    break;
+
+
+
+            }
         }
 
         public static void ShowEmployeeMenu()
