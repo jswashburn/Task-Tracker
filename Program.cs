@@ -20,6 +20,7 @@ namespace TaskTracker
         
         static void SaveTasks(List<Task> tasks)
         {
+            // Hello everyone
             // Serialize Tasks to file stream
             using Stream stream = File.Open("./tasks.xml", FileMode.OpenOrCreate, FileAccess.Write, FileShare.None);
             serializer.Serialize(stream, tasks);
