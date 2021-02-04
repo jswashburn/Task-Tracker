@@ -32,7 +32,21 @@ namespace TaskTracker
         // Overrides the default ToString behavior, provides string representation of Worker
         public override string ToString()
         {
-            return $"Employee {Name} | CurrentTasks: {AssignedTasks}";
+            string task = "There are no assigned tasks";
+            if (AssignedTasks.Count != 0)
+            {
+                AssignedTasks.ForEach(Console.WriteLine);
+            }
+            else { }
+
+            //string tasks = "";
+            //foreach (Task t in AssignedTasks)
+            //{
+            //    tasks += t + "\n";
+            //}
+
+            return $"Employee {Name} | CurrentTasks: {tasks}";
+
         }
     }
 }

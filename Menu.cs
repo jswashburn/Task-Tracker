@@ -166,7 +166,7 @@ namespace TaskTracker
                     DateTime birthday = new DateTime(year, month, day);
                     Employee newEmployee = new Employee(name, birthday);
                     Employees.Add(newEmployee);
-
+                    SaveEmployee(Employees);
                     Console.WriteLine("========================================\nTo continue press enter...");
                     Console.ReadLine();
                     break;
@@ -186,6 +186,7 @@ namespace TaskTracker
                             Employees.Remove(Employees[i]);
                             Console.WriteLine($"{delete} has been removed");
                             t = false;
+                            SaveEmployee(Employees);
                         }
                     }
                     if (t)

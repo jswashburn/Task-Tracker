@@ -11,11 +11,13 @@ namespace TaskTracker
     {
         public static List<Task> Tasks { get; set; } = new List<Task>();
         public static List<Employee> Employees { get; set; } = new List<Employee>();
-        static XmlSerializer Serializer = new XmlSerializer(typeof(List<Task>));
+        static XmlSerializer SerializerTask = new XmlSerializer(typeof(List<Task>));
+        static XmlSerializer SerializerEmp = new XmlSerializer(typeof(List<Employee>));
 
         static void Main(string[] args)
         {
             LoadTasks();
+            LoadEmployee();
             ShowMainMenu();
         }
         
@@ -24,7 +26,7 @@ namespace TaskTracker
             // Hello everyone
             // Serialize Tasks to file stream
             using Stream stream = File.Open("./tasks.xml", FileMode.OpenOrCreate, FileAccess.Write, FileShare.None);
-            Serializer.Serialize(stream, tasks);
+            SerializerTask.Serialize(stream, tasks);
         }
 
         public static void LoadTasks()
@@ -33,7 +35,31 @@ namespace TaskTracker
             {
                 // Open file stream and deserialize to Tasks
                 using Stream stream = File.OpenRead("./tasks.xml");
-                Tasks = (List<Task>)Serializer.Deserialize(stream);
+                Tasks = (List<Task>)SerializerTask.Deserialize(stream);
+            }
+            catch (FileNotFoundException)
+            {
+                Console.WriteLine("A local file was not found. Generating new file...");
+                //Thread.Sleep(4000);
+            }
+
+
+        }
+        public static void SaveEmployee(List<Employee> employee)
+        {
+            // Hello everyone
+            // Serialize Tasks to file stream
+            using Stream stream = File.Open("./employee.xml", FileMode.OpenOrCreate, FileAccess.Write, FileShare.None);
+            SerializerEmp.Serialize(stream, employee);
+        }
+
+        public static void LoadEmployee()
+        {
+            try
+            {
+                // Open file stream and deserialize to Tasks
+                using Stream stream = File.OpenRead("./employee.xml");
+                Employees = (List<Employee>)SerializerEmp.Deserialize(stream);
             }
             catch (FileNotFoundException)
             {
