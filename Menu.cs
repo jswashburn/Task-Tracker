@@ -77,11 +77,16 @@ namespace TaskTracker
                     Console.WriteLine("1. View Active Tasks");
                     Console.WriteLine("========================================");
                     if (TotalTask.Count != 0)
-
-
+                    {
+                        Employees.ForEach(Console.WriteLine);
+                    }
+                    else
+                    {
                         Console.WriteLine("========================================\nTo continue press enter...");
-                    Console.ReadLine();
+                        Console.ReadLine();
+                    }
                     break;
+
                 case 2:
                     Console.Clear();
                     Console.WriteLine("2. Show Completed Tasks");
@@ -136,11 +141,14 @@ namespace TaskTracker
                     {
                         Employees.ForEach(Console.WriteLine);
                     }
-                    else Console.WriteLine("There are no employees in your list");
-                    Console.WriteLine("========================================\nTo continue press enter...");
-                    Console.ReadLine();
+                    else
+                    {
+                        Console.WriteLine("========================================\nTo continue press enter...");
+                        Console.ReadLine();
+
+                    }
                     break;
-                //for each employee in employee list have that employee object print its staus
+                    //for each employee in employee list have that employee object print its staus
                 case 2:
                     Console.Clear();
                     Console.WriteLine("2. Create an Employee: ");
