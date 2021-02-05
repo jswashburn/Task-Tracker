@@ -19,7 +19,7 @@ namespace TaskTracker
 
         Task() { } // Parameterless constructor is required for XML serialization
 
-        public Task(string name, List<Employee> workersAssigned)
+        public Task(string name, List<Employee> workersAssigned = null)
         {
             Name = name.ToLower().Trim();
             WorkersAssigned = workersAssigned;

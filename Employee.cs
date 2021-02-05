@@ -38,14 +38,7 @@ namespace TaskTracker
                 AssignedTasks.ForEach(Console.WriteLine);
             }
             else { }
-
-            //string tasks = "";
-            //foreach (Task t in AssignedTasks)
-            //{
-            //    tasks += t + "\n";
-            //}
-
-            return $"Employee {Name} | CurrentTasks: {tasks}";
+            return $"Employee {Name} | CurrentTasks: {task}";
 
         }
     }
