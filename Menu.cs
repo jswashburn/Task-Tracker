@@ -79,13 +79,8 @@ namespace TaskTracker
                     LoadTasks();
                     if (Tasks.Any())
                     {
-                        //Until the task and emp assignment gets fixed...use this
-                        //Tasks.ForEach(Console.WriteLine);
-
-
                         for (int i = 0; i < Tasks.Count; i++)
                         {
-
                             if (!Tasks[i].Complete)
                             {
                                 Console.Write($"{Tasks[i]?.ToString()}. Is this task complete, Yes/No?");
@@ -128,8 +123,6 @@ namespace TaskTracker
                                 }
                             }
                         }
-
-
                     }
                     else Console.WriteLine("There are no active tasks");
 

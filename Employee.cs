@@ -36,7 +36,6 @@ namespace TaskTracker
             if (AssignedTasks.Count == 0)
             {
                 return $"Employee: {Name} |  Birthday:  {Birthday} |  CurrentTasks: {task}";
-
             }
             else
             {

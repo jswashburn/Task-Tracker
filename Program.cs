@@ -30,11 +30,6 @@ namespace TaskTracker
         {
             // Serialize Tasks to file stream
             using Stream stream = File.Open("./tasks.xml", FileMode.OpenOrCreate, FileAccess.Write, FileShare.None);
-            //string output = SerializerTask == null ? "SearlizerTask is null" : "It is not null";
-            //string output1 = stream == null ? "Stream is null" : "It is not null";
-            //string output2 = tasks == null ? "Stream is null" : "It is not null";
-            //Console.WriteLine(output + output1 + output2);
-            //Console.ReadLine();
             SerializerTask.Serialize(stream, tasks);
         }
 
