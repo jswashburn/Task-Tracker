@@ -12,7 +12,7 @@ namespace TaskTracker
         public List<Task> AssignedTasks { get; set; }
         public DateTime Birthday { get; set; }
 
-        public Employee() { } // Parameterless constructor is required for XML serialization
+        Employee() { } // Parameterless constructor is required for XML serialization
 
         public Employee(string name, DateTime birthday, List<Task> assignedTasks = null)
         {
@@ -33,13 +33,20 @@ namespace TaskTracker
         public override string ToString()
         {
             string task = "There are no assigned tasks";
-            if (AssignedTasks.Count != 0)
+            if (AssignedTasks.Count == 0)
             {
-                AssignedTasks.ForEach(Console.WriteLine);
-            }
-            else { }
-            return $"Employee {Name} | CurrentTasks: {task}";
+                return $"Employee: {Name} |  Birthday:  {Birthday} |  CurrentTasks: {task}";
 
+            }
+            else
+            {
+                task = "";
+                for(int t = 0; t < AssignedTasks.Count; t++)
+                {
+                    task += AssignedTasks[t].Name + "; ";
+                }
+                return $"Employee: {Name} |  Birthday:  {Birthday} |  CurrentTasks: {task}";
+            }
         }
     }
 }

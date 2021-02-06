@@ -4,11 +4,14 @@ using System.Xml.Serialization;
 using System.IO;
 using static TaskTracker.Menu;
 using System.Threading;
+using System.Threading.Tasks;
 
 namespace TaskTracker
 {
     class Program
     {
+
+
         public static List<Task> Tasks { get; set; } = new List<Task>();
         public static List<Employee> Employees { get; set; } = new List<Employee>();
         static XmlSerializer SerializerTask = new XmlSerializer(typeof(List<Task>));
@@ -16,16 +19,22 @@ namespace TaskTracker
 
         static void Main(string[] args)
         {
+            CancellationTokenSource tokenSource = new CancellationTokenSource();
             LoadTasks();
             LoadEmployee();
             ShowMainMenu();
         }
-        
+
+
         public static void SaveTasks(List<Task> tasks)
         {
-            // Hello everyone
             // Serialize Tasks to file stream
             using Stream stream = File.Open("./tasks.xml", FileMode.OpenOrCreate, FileAccess.Write, FileShare.None);
+            //string output = SerializerTask == null ? "SearlizerTask is null" : "It is not null";
+            //string output1 = stream == null ? "Stream is null" : "It is not null";
+            //string output2 = tasks == null ? "Stream is null" : "It is not null";
+            //Console.WriteLine(output + output1 + output2);
+            //Console.ReadLine();
             SerializerTask.Serialize(stream, tasks);
         }
 
@@ -39,15 +48,14 @@ namespace TaskTracker
             }
             catch (FileNotFoundException)
             {
-                Console.WriteLine("A local file was not found. Generating new file...");
-                //Thread.Sleep(4000);
+                Console.WriteLine("A local tasks file was not found. Generating new file...");
+                Thread.Sleep(2500);
             }
 
 
         }
         public static void SaveEmployee(List<Employee> employee)
         {
-            // Hello everyone
             // Serialize Tasks to file stream
             using Stream stream = File.Open("./employee.xml", FileMode.OpenOrCreate, FileAccess.Write, FileShare.None);
             SerializerEmp.Serialize(stream, employee);
@@ -63,10 +71,9 @@ namespace TaskTracker
             }
             catch (FileNotFoundException)
             {
-                Console.WriteLine("A local file was not found. Generating new file...");
-                Thread.Sleep(4000);
+                Console.WriteLine("A local employee file was not found. Generating new file...");
+                Thread.Sleep(2500);
             }
-
         }
     }
 }

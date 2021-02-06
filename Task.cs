@@ -12,11 +12,6 @@ namespace TaskTracker
         public DateTime? DateCompleted { get; set; }
         public bool Complete { get; set; }
 
-
-        static public List<Task> TotalTask { get; set; } = new List<Task>();
-
-        
-
         Task() { } // Parameterless constructor is required for XML serialization
 
         public Task(string name, List<Employee> workersAssigned = null)
@@ -26,7 +21,6 @@ namespace TaskTracker
             DateCreated = DateTime.Now;
             DateCompleted = null;
             Complete = false;
-            TotalTask.Add(this);
         }
 
         // Part of the ISerializable interface needed to serialize (save) classes

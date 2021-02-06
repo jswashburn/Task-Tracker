@@ -31,6 +31,7 @@ namespace TaskTracker
                 Console.WriteLine("3. Quit");
                 Console.WriteLine("========================================");
 
+
                 int userInput = Check(Console.ReadLine()); //tryparse didnt work? use the out reference?
                 Console.Clear();
 
@@ -63,43 +64,111 @@ namespace TaskTracker
         public static void ShowTaskMenu()
         {
             Console.WriteLine("=============== Task Menu ==============");
-            Console.WriteLine("1. View Active Tasks");
+            Console.WriteLine("1. Show Active Tasks");
             Console.WriteLine("2. Show Completed Tasks");
             Console.WriteLine("3. Create Task");
             Console.WriteLine("4. Return to Main Menu");
             Console.WriteLine("========================================");
-            Console.ReadLine();
             int userInput = Check(Console.ReadLine());
             switch (userInput)
             {
                 case 1:
                     Console.Clear();
-                    Console.WriteLine("1. View Active Tasks");
+                    Console.WriteLine("1. Show Active Tasks");
                     Console.WriteLine("========================================");
-                    if (TotalTask.Count != 0)
+                    LoadTasks();
+                    if (Tasks.Any())
                     {
-                        Employees.ForEach(Console.WriteLine);
+                        //Until the task and emp assignment gets fixed...use this
+                        //Tasks.ForEach(Console.WriteLine);
+
+
+                        for (int i = 0; i < Tasks.Count; i++)
+                        {
+
+                            if (!Tasks[i].Complete)
+                            {
+                                Console.Write($"{Tasks[i]?.ToString()}. Is this task complete, Yes/No?");
+
+                                string input = Console.ReadLine().ToLower().Trim();
+                                while (input != "yes" && input != "no")
+                                {
+                                    Console.Write("That was not a valid entry: ");
+                                    input = Console.ReadLine().ToLower().Trim();
+                                }
+                                if (input == "yes") { Tasks[i].Complete = true; SaveTasks(Tasks); return; }
+
+                                Console.Write($"Do you want to add a worker to this task, Yes/No?");
+
+                                string input2 = Console.ReadLine().ToLower().Trim();
+                                while (input2 != "yes" && input2 != "no")
+                                {
+                                    Console.Write("That was not a valid entry: ");
+                                    input2 = Console.ReadLine().ToLower().Trim();
+                                }
+                                if (input2 == "yes")
+                                {
+                                    Console.Write("Enter an employee name: ");
+                                    string input3 = Console.ReadLine().ToLower().Trim();
+                                    bool check = true;
+                                    for (int e = 0; e < Employees.Count; e++)
+                                    {
+                                        if (Employees[e].Name == input3)
+                                        {
+                                            Employee emp = new Employee(Employees[e].Name, Employees[e].Birthday);
+                                            Task task = new Task(Tasks[i].Name);
+                                            Employees[e].AssignedTasks.Add(task);
+                                            Tasks[i].WorkersAssigned.Add(emp);
+                                            SaveEmployee(Employees);
+                                            SaveTasks(Tasks);
+                                            check = false;
+                                        }
+                                    }
+                                    if (check) { Console.WriteLine("That name does not exist"); }
+                                }
+                            }
+                        }
+
+
                     }
-                    else
-                    {
-                        Console.WriteLine("========================================\nTo continue press enter...");
-                        Console.ReadLine();
-                    }
+                    else Console.WriteLine("There are no active tasks");
+
+                    
+                    Console.WriteLine("========================================\nTo continue press enter...");
+                    Console.ReadLine();
                     break;
 
                 case 2:
                     Console.Clear();
-                    Console.WriteLine("2. Show Completed Tasks");
+                    Console.WriteLine("2. Show Completed tasks");
                     Console.WriteLine("========================================");
+                    LoadTasks();
+
+                    if (Tasks != null)
+                    {
+                        foreach (Task t in Tasks)
+                        {
+                            if (t.Complete) { Console.WriteLine(t.ToString()); }
+                            
+                        }
+                    }
+                    else Console.WriteLine("There are no Completed Tasks");
+
 
                     Console.WriteLine("========================================\nTo continue press enter...");
                     Console.ReadLine();
                     break;
+
                 case 3:
                     Console.Clear();
                     Console.WriteLine("3. Create Task");
                     Console.WriteLine("========================================");
-
+                    Console.Write("Please enter the name of the task you would like to create: ");
+                    string name = Console.ReadLine();
+                    Task newTask = new Task(name);
+                    Tasks.Add(newTask);
+                    SaveTasks(Tasks);
+                    Console.WriteLine("Task added successfully");
                     Console.WriteLine("========================================\nTo continue press enter...");
                     Console.ReadLine();
                     break;
@@ -107,9 +176,6 @@ namespace TaskTracker
                     Console.Clear();
                     Console.WriteLine("4. Return to Main Menu");
                     Console.WriteLine("========================================");
-
-                    Console.WriteLine("========================================\nTo continue press enter...");
-                    Console.ReadLine();
                     break;
                 default:
                     Console.WriteLine("Invalid user input, please try again");
@@ -137,18 +203,23 @@ namespace TaskTracker
                     Console.Clear();
                     Console.WriteLine("1. Show All Employees: ");
                     Console.WriteLine("========================================");
+                    LoadEmployee();
                     if (Employees.Count != 0)
                     {
-                        Employees.ForEach(Console.WriteLine);
+                        foreach(Employee e in Employees)
+                        {
+                            Console.WriteLine(e);
+                        }
                     }
                     else
                     {
-                        Console.WriteLine("========================================\nTo continue press enter...");
-                        Console.ReadLine();
-
+                        Console.WriteLine("There are no employees");
                     }
+                    Console.WriteLine("========================================\nTo continue press enter...");
+                    Console.ReadLine();
                     break;
-                    //for each employee in employee list have that employee object print its staus
+
+                //for each employee in employee list have that employee object print its staus
                 case 2:
                     Console.Clear();
                     Console.WriteLine("2. Create an Employee: ");
