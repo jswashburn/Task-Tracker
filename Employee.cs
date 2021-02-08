@@ -17,7 +17,7 @@ namespace TaskTracker
         public Employee(string name, DateTime birthday, List<Task> assignedTasks = null)
         {
             Name = name;
-            AssignedTasks = assignedTasks;
+            AssignedTasks = assignedTasks != null ? assignedTasks : new List<Task>();
             Birthday = birthday;
         }
 
