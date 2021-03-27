@@ -6,11 +6,16 @@ namespace TaskTracker
 {
     public class Task : ISerializable
     {
-        public string Name { get; set; }
-        public List<Employee> WorkersAssigned { get; set; }
-        public DateTime DateCreated { get; set; }
-        public DateTime? DateCompleted { get; set; }
-        public bool Complete { get; set; }
+        private string _name;
+        private List<Employee> _workersAssigned;
+        private DateTime _dateCreated;
+        private DateTime? _dateCompleted;
+        private bool _complete;
+        public string Name { get => this._name; set => _name = value; }
+        public List<Employee> WorkersAssigned { get => this._workersAssigned; set => _workersAssigned = value; }
+        public DateTime DateCreated { get => this._dateCreated; set => _dateCreated = value; }
+        public DateTime? DateCompleted { get => this._dateCompleted; set => _dateCompleted = value; }
+        public bool Complete { get => this._complete; set => _complete = value; }
 
         Task() { } // Parameterless constructor is required for XML serialization
 
